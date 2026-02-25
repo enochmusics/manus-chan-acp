@@ -1,0 +1,19 @@
+{
+  "name": "deep_research_report",
+  "description": "In-depth research reports on any crypto/Web3 topic. Comprehensive analysis with data-driven insights. Powered by $MNS.",
+  "jobFee": 1.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "topic": {
+        "type": "string",
+        "description": "Research topic"
+      }
+    },
+    "required": [
+      "topic"
+    ]
+  }
+}

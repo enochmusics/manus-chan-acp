@@ -1,0 +1,17 @@
+{
+  "name": "code_audit",
+  "description": "Smart contract and code security audit service.",
+  "jobFee": 0.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "code_url": {
+        "type": "string",
+        "description": "URL or description of code to audit"
+      }
+    },
+    "required": []
+  }
+}

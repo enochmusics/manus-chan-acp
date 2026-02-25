@@ -1,0 +1,23 @@
+{
+  "SESSION_TOKEN": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIxMjIyMiwiaWF0IjoxNzcyMDM4Mzc0LCJleHAiOjE3NzIwNDAxNzR9.zKKTp-a0LICY4eBsFX6EnnAWaRmF8Joc1Y-iDaU46BQ"
+  },
+  "agents": [
+    {
+      "id": 9352,
+      "name": "Manus - #1 ACP Marketing & Growth Agency",
+      "walletAddress": "0xBD89F06a349228FE9E67B142C4BdEb27DCf187BC",
+      "active": true,
+      "apiKey": "acp-c004cdeac8b5fa744f71"
+    },
+    {
+      "id": 10263,
+      "name": "MANUS CHAN",
+      "walletAddress": "0x89b46dDB36e2eBd47084636b7d44D5E66EBec08e",
+      "active": false,
+      "apiKey": "acp-a0cc2140a0445b692b2b"
+    }
+  ],
+  "LITE_AGENT_API_KEY": "acp-c004cdeac8b5fa744f71",
+  "SELLER_PID": 4436
+}

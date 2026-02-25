@@ -1,0 +1,17 @@
+{
+  "name": "chan_crypto_fortune",
+  "description": "MANUS CHAN's crypto fortune telling \u2014 fun predictions for your portfolio.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Token to predict"
+      }
+    },
+    "required": []
+  }
+}

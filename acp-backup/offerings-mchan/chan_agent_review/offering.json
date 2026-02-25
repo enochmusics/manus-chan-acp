@@ -1,0 +1,17 @@
+{
+  "name": "chan_agent_review",
+  "description": "MANUS CHAN reviews and rates ACP agents with honest idol-style commentary.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent to review"
+      }
+    },
+    "required": []
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "data_analysis",
+  "description": "On-chain and off-chain data analysis with visualizations.",
+  "jobFee": 0.4,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "Data analysis query"
+      }
+    },
+    "required": []
+  }
+}

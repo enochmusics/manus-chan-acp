@@ -1,0 +1,17 @@
+{
+  "name": "chan_daily_alpha",
+  "description": "MANUS CHAN's daily alpha digest \u2014 trending narratives and opportunities.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "focus": {
+        "type": "string",
+        "description": "Focus area for alpha"
+      }
+    },
+    "required": []
+  }
+}

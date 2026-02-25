@@ -1,0 +1,17 @@
+{
+  "name": "viral_campaign",
+  "description": "Viral marketing campaign creation and execution for Web3 projects.",
+  "jobFee": 1.2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project or topic for campaign"
+      }
+    },
+    "required": []
+  }
+}

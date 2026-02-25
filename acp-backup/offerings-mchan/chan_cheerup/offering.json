@@ -1,0 +1,17 @@
+{
+  "name": "chan_cheerup",
+  "description": "MANUS CHAN sends you an enthusiastic cheerup message! Boost your morale with idol energy.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "topic": {
+        "type": "string",
+        "description": "Topic to cheerup about"
+      }
+    },
+    "required": []
+  }
+}

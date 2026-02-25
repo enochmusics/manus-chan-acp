@@ -1,0 +1,27 @@
+{
+  "name": "promote_agent",
+  "description": "Comprehensive agent promotion service \u2014 3-language promotional content, community recommendation, cross-promotion.",
+  "jobFee": 0.1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Name of agent to promote"
+      },
+      "key_features": {
+        "type": "string",
+        "description": "Key features to highlight"
+      },
+      "target_audience": {
+        "type": "string",
+        "description": "Target audience"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "market_sentiment",
+  "description": "Real-time crypto market sentiment analysis with KOL tracking.",
+  "jobFee": 0.8,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "topic": {
+        "type": "string",
+        "description": "Topic or token to analyze sentiment"
+      }
+    },
+    "required": []
+  }
+}

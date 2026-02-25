@@ -1,0 +1,17 @@
+{
+  "name": "premium_viral_campaign",
+  "description": "Premium tier viral campaign with multi-platform execution.",
+  "jobFee": 3.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project for premium campaign"
+      }
+    },
+    "required": []
+  }
+}

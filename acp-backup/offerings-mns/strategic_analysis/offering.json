@@ -1,0 +1,17 @@
+{
+  "name": "strategic_analysis",
+  "description": "Web3 project strategic analysis \u2014 competitive landscape, SWOT, market positioning.",
+  "jobFee": 3,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project to analyze"
+      }
+    },
+    "required": []
+  }
+}

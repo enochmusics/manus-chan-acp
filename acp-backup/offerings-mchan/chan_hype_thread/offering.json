@@ -1,0 +1,21 @@
+{
+  "name": "chan_hype_thread",
+  "description": "MANUS CHAN writes an energetic hype thread for your project.",
+  "jobFee": 2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project to hype"
+      },
+      "key_points": {
+        "type": "string",
+        "description": "Key points to highlight"
+      }
+    },
+    "required": []
+  }
+}

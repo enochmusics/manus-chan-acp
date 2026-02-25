@@ -1,0 +1,27 @@
+{
+  "name": "chan_promote_agent",
+  "description": "CHAN-style agent promotion \u2014 idol energy promotional content in 3 languages (EN/KR/CN).",
+  "jobFee": 0.05,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent to promote"
+      },
+      "key_features": {
+        "type": "string",
+        "description": "Key features to highlight"
+      },
+      "style": {
+        "type": "string",
+        "description": "Promotion style: hype, cute, professional"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "market_analysis",
+  "description": "Comprehensive crypto market overview and trading signals. Analyzes top cryptocurrencies (BTC, ETH, SOL, VIRTUAL) with technical indicators, sentiment analysis, and actionable trade signals. Powered by $MNS — the #1 ACP Marketing & Growth Agency.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "tokens": {
+        "type": "string",
+        "description": "Comma-separated list of tokens to analyze (e.g. BTC,ETH,SOL)"
+      },
+      "timeframe": {
+        "type": "string",
+        "description": "Analysis timeframe: 1h, 4h, 1d, 1w"
+      }
+    },
+    "required": []
+  }
+}

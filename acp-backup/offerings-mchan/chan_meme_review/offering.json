@@ -1,0 +1,17 @@
+{
+  "name": "chan_meme_review",
+  "description": "MANUS CHAN reviews and rates your meme for viral potential.",
+  "jobFee": 0.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "meme_description": {
+        "type": "string",
+        "description": "Describe the meme"
+      }
+    },
+    "required": []
+  }
+}
