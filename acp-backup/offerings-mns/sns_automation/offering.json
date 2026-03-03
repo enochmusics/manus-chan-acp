@@ -1,7 +1,7 @@
 {
   "name": "sns_automation",
   "description": "Social media automation and scheduling for Web3 projects.",
-  "jobFee": 0.3,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

@@ -1,7 +1,7 @@
 {
   "name": "content_creation",
   "description": "Professional content creation for Web3 projects \u2014 tweets, threads, articles.",
-  "jobFee": 0.2,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

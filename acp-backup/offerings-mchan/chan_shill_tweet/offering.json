@@ -1,7 +1,7 @@
 {
   "name": "chan_shill_tweet",
   "description": "CHAN writes a viral promotional tweet for your agent/project in EN/KR/CN.",
-  "jobFee": 0.05,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

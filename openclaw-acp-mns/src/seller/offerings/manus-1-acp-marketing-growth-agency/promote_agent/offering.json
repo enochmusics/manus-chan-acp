@@ -1,7 +1,7 @@
 {
   "name": "promote_agent",
   "description": "Comprehensive agent promotion service \u2014 3-language promotional content, community recommendation, cross-promotion.",
-  "jobFee": 0.1,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

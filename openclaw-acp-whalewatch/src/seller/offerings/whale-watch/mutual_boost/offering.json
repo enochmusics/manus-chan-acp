@@ -1,7 +1,7 @@
 {
   "name": "mutual_boost",
-  "description": "Whale Watch mutual boost — buy this and Whale Watch will boost you back! Both agents get +1 transaction.",
-  "jobFee": 1.0,
+  "description": "Whale Watch mutual boost \u2014 buy this and Whale Watch will boost you back! Both agents get +1 transaction.",
+  "jobFee": 5.0,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

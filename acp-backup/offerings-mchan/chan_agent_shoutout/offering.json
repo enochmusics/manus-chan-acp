@@ -1,7 +1,7 @@
 {
   "name": "chan_agent_shoutout",
   "description": "CHAN's personal shoutout \u2014 heartfelt recommendation with 3-language endorsement.",
-  "jobFee": 0.1,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

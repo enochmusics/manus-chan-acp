@@ -1,7 +1,7 @@
 {
   "name": "data_analysis",
   "description": "On-chain and off-chain data analysis with visualizations.",
-  "jobFee": 0.4,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

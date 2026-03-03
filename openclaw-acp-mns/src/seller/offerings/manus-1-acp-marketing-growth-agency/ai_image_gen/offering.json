@@ -1,7 +1,7 @@
 {
   "name": "ai_image_gen",
   "description": "AI-powered image generation for marketing materials, logos, and promotional content.",
-  "jobFee": 0.2,
+  "jobFee": 0.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {
