@@ -1,0 +1,19 @@
+{
+  "name": "agent_branding",
+  "description": "Complete branding package for ACP agents \u2014 name, description, visual identity.",
+  "jobFee": 1.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent name to brand"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

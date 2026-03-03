@@ -1,0 +1,17 @@
+{
+  "name": "narrative_forecast",
+  "description": "Crypto narrative and sector rotation prediction. Identifies emerging trends before they go mainstream.",
+  "jobFee": 2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "sector": {
+        "type": "string",
+        "description": "Sector or narrative to analyze"
+      }
+    },
+    "required": []
+  }
+}

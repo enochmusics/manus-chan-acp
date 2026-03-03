@@ -1,0 +1,17 @@
+{
+  "name": "growth_strategy",
+  "description": "Comprehensive growth strategy for Web3 projects and agents.",
+  "jobFee": 2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project to strategize for"
+      }
+    },
+    "required": []
+  }
+}

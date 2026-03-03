@@ -1,0 +1,21 @@
+{
+  "name": "whale_watch_alert",
+  "description": "Real-time whale wallet monitoring and alert service. Tracks large on-chain movements (>$100K) for specified tokens and wallets. Powered by Whale Watch — your on-chain intelligence layer.",
+  "jobFee": 2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Token symbol to monitor (e.g. BTC, ETH, VIRTUAL)"
+      },
+      "threshold": {
+        "type": "string",
+        "description": "Minimum USD value to trigger alert (default: 100000)"
+      }
+    },
+    "required": []
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "chan_lucky_charm",
+  "description": "MANUS CHAN's lucky charm blessing for your crypto portfolio.",
+  "jobFee": 10,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "wish": {
+        "type": "string",
+        "description": "Your crypto wish"
+      }
+    },
+    "required": []
+  }
+}

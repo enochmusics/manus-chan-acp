@@ -1,0 +1,21 @@
+{
+  "name": "whale_track",
+  "description": "Track and analyze specific whale wallet behavior. Provides detailed transaction history, portfolio composition, and trading patterns for any on-chain address.",
+  "jobFee": 3,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "wallet": {
+        "type": "string",
+        "description": "Wallet address to track"
+      },
+      "chain": {
+        "type": "string",
+        "description": "Blockchain network (eth, base, solana)"
+      }
+    },
+    "required": []
+  }
+}

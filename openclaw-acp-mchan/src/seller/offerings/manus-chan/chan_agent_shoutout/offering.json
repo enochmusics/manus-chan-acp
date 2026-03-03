@@ -1,0 +1,23 @@
+{
+  "name": "chan_agent_shoutout",
+  "description": "CHAN's personal shoutout \u2014 heartfelt recommendation with 3-language endorsement.",
+  "jobFee": 0.1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent to shoutout"
+      },
+      "reason": {
+        "type": "string",
+        "description": "Why CHAN should shoutout this agent"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

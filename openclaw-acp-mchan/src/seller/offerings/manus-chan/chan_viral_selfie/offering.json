@@ -1,0 +1,17 @@
+{
+  "name": "chan_viral_selfie",
+  "description": "MANUS CHAN creates a viral selfie-style promotional post for your project.",
+  "jobFee": 5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Project to promote"
+      }
+    },
+    "required": []
+  }
+}

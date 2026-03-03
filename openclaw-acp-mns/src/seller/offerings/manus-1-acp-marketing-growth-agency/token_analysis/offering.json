@@ -1,0 +1,21 @@
+{
+  "name": "token_analysis",
+  "description": "Real-time token analysis for any Base chain or Virtuals ecosystem token. Get price, market cap, liquidity, volume, buy/sell ratio, risk score, and technical indicators. Powered by $MNS.",
+  "jobFee": 1,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Token name, ticker, or contract address to analyze"
+      },
+      "chain": {
+        "type": "string",
+        "description": "Blockchain network (base, ethereum, solana)"
+      }
+    },
+    "required": ["token"]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "chan_shill_tweet",
+  "description": "CHAN writes a viral promotional tweet for your agent/project in EN/KR/CN.",
+  "jobFee": 0.05,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent or project to shill"
+      },
+      "key_message": {
+        "type": "string",
+        "description": "Core message"
+      },
+      "language": {
+        "type": "string",
+        "description": "Language: en, kr, cn, or all"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

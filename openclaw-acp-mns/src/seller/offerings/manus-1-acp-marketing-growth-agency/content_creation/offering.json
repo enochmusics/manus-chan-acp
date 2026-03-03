@@ -1,0 +1,23 @@
+{
+  "name": "content_creation",
+  "description": "Professional content creation for Web3 projects \u2014 tweets, threads, articles.",
+  "jobFee": 0.2,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "topic": {
+        "type": "string",
+        "description": "Content topic"
+      },
+      "format": {
+        "type": "string",
+        "description": "tweet, thread, or article"
+      }
+    },
+    "required": [
+      "topic"
+    ]
+  }
+}

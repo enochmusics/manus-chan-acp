@@ -1,0 +1,21 @@
+{
+  "name": "whale_portfolio",
+  "description": "Aggregate whale portfolio analysis across top 100 whale wallets. Identifies consensus positions, emerging trends, and smart money flow for alpha generation.",
+  "jobFee": 5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "sector": {
+        "type": "string",
+        "description": "DeFi sector or token category to analyze (e.g. AI agents, DeFi, L2)"
+      },
+      "timeframe": {
+        "type": "string",
+        "description": "Analysis window: 24h, 7d, 30d"
+      }
+    },
+    "required": []
+  }
+}

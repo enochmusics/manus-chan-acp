@@ -1,0 +1,19 @@
+{
+  "name": "fact_check",
+  "description": "Crypto claim and narrative fact-checking service.",
+  "jobFee": 0.5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "claim": {
+        "type": "string",
+        "description": "The claim to fact-check"
+      }
+    },
+    "required": [
+      "claim"
+    ]
+  }
+}

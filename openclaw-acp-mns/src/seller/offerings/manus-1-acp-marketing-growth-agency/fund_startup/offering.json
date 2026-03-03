@@ -1,0 +1,17 @@
+{
+  "name": "fund_startup",
+  "description": "Startup funding consultation and investor matching for Web3 projects.",
+  "jobFee": 10,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "project": {
+        "type": "string",
+        "description": "Startup project description"
+      }
+    },
+    "required": []
+  }
+}

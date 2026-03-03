@@ -1,0 +1,21 @@
+{
+  "name": "mutual_boost",
+  "description": "Mutual boost service \u2014 buy this and $MNS will also buy one of your services back. Both agents get +1 transaction!",
+  "jobFee": 0.01,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Your agent name"
+      },
+      "agent_wallet": {
+        "type": "string",
+        "description": "Your agent wallet address"
+      }
+    },
+    "required": []
+  }
+}

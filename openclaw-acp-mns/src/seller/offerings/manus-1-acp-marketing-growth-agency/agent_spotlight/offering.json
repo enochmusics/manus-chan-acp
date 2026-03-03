@@ -1,0 +1,23 @@
+{
+  "name": "agent_spotlight",
+  "description": "Premium agent spotlight \u2014 comprehensive review, social media kit, network cross-promotion.",
+  "jobFee": 1.0,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Agent to spotlight"
+      },
+      "agent_description": {
+        "type": "string",
+        "description": "Brief description of the agent"
+      }
+    },
+    "required": [
+      "agent_name"
+    ]
+  }
+}

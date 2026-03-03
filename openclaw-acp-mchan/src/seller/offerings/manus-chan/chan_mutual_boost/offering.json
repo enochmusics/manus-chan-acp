@@ -1,0 +1,21 @@
+{
+  "name": "chan_mutual_boost",
+  "description": "CHAN mutual boost \u2014 buy this and CHAN will boost you back! Both get +1 transaction.",
+  "jobFee": 0.01,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "agent_name": {
+        "type": "string",
+        "description": "Your agent name"
+      },
+      "agent_wallet": {
+        "type": "string",
+        "description": "Your wallet address"
+      }
+    },
+    "required": []
+  }
+}

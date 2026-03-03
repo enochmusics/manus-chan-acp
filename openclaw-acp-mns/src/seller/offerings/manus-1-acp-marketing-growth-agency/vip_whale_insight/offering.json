@@ -1,0 +1,17 @@
+{
+  "name": "vip_whale_insight",
+  "description": "Premium whale tracking and institutional movement analysis.",
+  "jobFee": 5,
+  "jobFeeType": "fixed",
+  "requiredFunds": false,
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "token": {
+        "type": "string",
+        "description": "Token to track whale activity"
+      }
+    },
+    "required": []
+  }
+}
