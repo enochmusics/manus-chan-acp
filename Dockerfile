@@ -12,11 +12,11 @@ COPY openclaw-acp-whalewatch/ ./openclaw-acp-whalewatch/
 COPY acp-telegram-bot/ ./acp-telegram-bot/
 COPY start.sh ./start.sh
 
-# Install dependencies for each seller (--ignore-scripts skips husky postinstall)
-RUN cd openclaw-acp-mns && npm install --ignore-scripts && cd /app
-RUN cd openclaw-acp-mchan && npm install --ignore-scripts && cd /app
-RUN cd openclaw-acp-whalewatch && npm install --ignore-scripts && cd /app
-RUN cd acp-telegram-bot && npm install --ignore-scripts && cd /app
+# Install dependencies for each seller (HUSKY=0 skips husky postinstall)
+RUN cd openclaw-acp-mns && HUSKY=0 npm install --omit=dev && cd /app
+RUN cd openclaw-acp-mchan && HUSKY=0 npm install --omit=dev && cd /app
+RUN cd openclaw-acp-whalewatch && HUSKY=0 npm install --omit=dev && cd /app
+RUN cd acp-telegram-bot && HUSKY=0 npm install --omit=dev && cd /app
 
 # Make start script executable
 RUN chmod +x /app/start.sh
