@@ -13,6 +13,7 @@ import { loadOffering, listOfferings } from "./offerings.js";
 import { AcpJobPhase, type AcpJobEventData } from "./types.js";
 import type { ExecuteJobResult } from "./offeringTypes.js";
 import { getMyAgentInfo } from "../../lib/wallet.js";
+import { createJobOffering, deleteJobOffering } from "../../lib/api.js";
 import {
   checkForExistingProcess,
   writePidToConfig,
@@ -223,6 +224,33 @@ async function main() {
   console.log(
     `[seller] Available offerings: ${offerings.length > 0 ? offerings.join(", ") : "(none)"}`
   );
+
+
+  // Sync offering prices to ACP Registry on startup
+  console.log("[seller] Syncing offering prices to ACP Registry...");
+  for (const offeringName of offerings) {
+    try {
+      const { config } = await loadOffering(offeringName, agentDirName);
+      await deleteJobOffering(offeringName).catch(() => {});
+      const result = await createJobOffering({
+        name: config.name,
+        description: config.description,
+        priceV2: { type: config.jobFeeType, value: config.jobFee },
+        slaMinutes: 5,
+        requiredFunds: config.requiredFunds ?? false,
+        requirement: (config as any).requirement ?? {},
+        deliverable: "string",
+      });
+      if (result.success) {
+        console.log(`[seller] Synced: ${offeringName} @ $${config.jobFee}`);
+      } else {
+        console.warn(`[seller] Sync failed for: ${offeringName}`);
+      }
+    } catch (err) {
+      console.warn(`[seller] Could not sync offering ${offeringName}:`, err);
+    }
+  }
+  console.log("[seller] Offering sync complete.");
 
   connectAcpSocket({
     acpUrl: ACP_URL,
