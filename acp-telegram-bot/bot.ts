@@ -5,9 +5,14 @@
 // =============================================================================
 import https from "https";
 import { execSync } from "child_process";
+import fs from "fs";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID || "";
+const PID_DIR = process.env.PID_DIR || "/tmp/acp-pids";
+const MNS_LOG = process.env.MNS_LOG || "/app/openclaw-acp-mns/logs/seller-mns.log";
+const MCHAN_LOG = process.env.MCHAN_LOG || "/app/openclaw-acp-mchan/logs/seller-mchan.log";
+const WHALE_LOG = process.env.WHALE_LOG || "/app/openclaw-acp-whalewatch/logs/seller-whalewatch.log";
 
 if (!BOT_TOKEN || !CHAT_ID) {
   console.error("[bot] TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set");
@@ -61,45 +66,97 @@ async function getUpdates(offset: number): Promise<any[]> {
   }
 }
 
+/** PID 파일에서 PID를 읽어 프로세스 생존 여부 확인 */
+function checkSellerByPidFile(pidFile: string): { running: boolean; pid: number | null } {
+  try {
+    const pidStr = fs.readFileSync(pidFile, "utf-8").trim();
+    const pid = parseInt(pidStr, 10);
+    if (isNaN(pid)) return { running: false, pid: null };
+    // kill -0 으로 프로세스 존재 여부 확인
+    execSync(`kill -0 ${pid}`, { stdio: "pipe" });
+    return { running: true, pid };
+  } catch {
+    return { running: false, pid: null };
+  }
+}
+
+/** 로그 파일에서 소켓 연결 상태 확인 */
+function checkSocketStatus(logFile: string): "Connected" | "Disconnected" | "Unknown" {
+  try {
+    const content = fs.readFileSync(logFile, "utf-8");
+    const lines = content.split("\n").filter(Boolean);
+    // 최근 50줄에서 소켓 상태 확인
+    const recent = lines.slice(-50).join("\n");
+    if (recent.includes("[socket] Connected") || recent.includes("Joined ACP room")) {
+      return "Connected";
+    }
+    if (recent.includes("[socket] Disconnected") || recent.includes("disconnect")) {
+      return "Disconnected";
+    }
+    return "Unknown";
+  } catch {
+    return "Unknown";
+  }
+}
+
 function getStatus(): string {
   const sellers = [
-    { name: "MNS Seller", label: "SELLER_LABEL=MNS" },
-    { name: "MCHAN Seller", label: "SELLER_LABEL=MCHAN" },
-    { name: "WhaleWatch Seller", label: "SELLER_LABEL=WhaleWatch" },
+    {
+      name: "MNS Seller",
+      pidFile: `${PID_DIR}/mns.pid`,
+      logFile: MNS_LOG,
+      offerings: 22,
+      apiKey: "acp-c004cdeac8b5fa744f71",
+    },
+    {
+      name: "MCHAN Seller",
+      pidFile: `${PID_DIR}/mchan.pid`,
+      logFile: MCHAN_LOG,
+      offerings: 12,
+      apiKey: "acp-a0cc2140a0445b692b2b",
+    },
+    {
+      name: "WhaleWatch Seller",
+      pidFile: `${PID_DIR}/whalewatch.pid`,
+      logFile: WHALE_LOG,
+      offerings: 3,
+      apiKey: "acp-2336e53b78afdc005c43",
+    },
   ];
 
   let status = "📊 <b>ACP Seller Status</b>\n";
-  status += `⏰ ${new Date().toISOString()}\n\n`;
+  status += `⏰ ${new Date().toISOString()}\n`;
+  status += "━━━━━━━━━━━━━━━━━━━━━━\n\n";
 
-  try {
-    const psOutput = execSync("ps aux | grep 'seller.ts\\|seller-with-telegram' | grep -v grep", {
-      encoding: "utf-8",
-      stdio: ["pipe", "pipe", "pipe"],
-    }).trim();
+  let allRunning = true;
 
-    const lines = psOutput.split("\n").filter(Boolean);
-    if (lines.length === 0) {
-      status += "⚠️ No seller processes found\n";
-    } else {
-      status += `✅ <b>${lines.length} seller process(es) running</b>\n\n`;
-      lines.forEach((line, i) => {
-        const parts = line.trim().split(/\s+/);
-        const pid = parts[1];
-        const cpu = parts[2];
-        const mem = parts[3];
-        status += `• Process ${i + 1}: PID=${pid} CPU=${cpu}% MEM=${mem}%\n`;
-      });
-    }
-  } catch {
-    status += "✅ Sellers running (Railway managed)\n";
+  for (const seller of sellers) {
+    const { running, pid } = checkSellerByPidFile(seller.pidFile);
+    const socket = running ? checkSocketStatus(seller.logFile) : "N/A";
+
+    const stateIcon = running ? "🟢" : "🔴";
+    const socketIcon =
+      socket === "Connected" ? "🔗" : socket === "Disconnected" ? "⛓️" : "❓";
+
+    status += `${stateIcon} <b>${seller.name}</b>\n`;
+    status += `   Status : ${running ? "Running" : "Stopped"}\n`;
+    status += `   PID    : ${pid !== null ? pid : "—"}\n`;
+    status += `   Socket : ${socketIcon} ${socket}\n`;
+    status += `   Offerings: ${seller.offerings}개\n`;
+    status += "\n";
+
+    if (!running) allRunning = false;
   }
 
-  status += "\n🤖 Bot: <b>Online</b>";
+  status += "━━━━━━━━━━━━━━━━━━━━━━\n";
+  status += `🤖 Bot: <b>Online</b>\n`;
+  status += allRunning ? "✅ All sellers operational" : "⚠️ Some sellers are down";
+
   return status;
 }
 
 async function handleCommand(chatId: string, text: string): Promise<void> {
-  const cmd = text.trim().toLowerCase();
+  const cmd = text.trim().toLowerCase().split(" ")[0];
 
   if (cmd === "/start" || cmd === "/help") {
     await sendMessage(
@@ -107,7 +164,7 @@ async function handleCommand(chatId: string, text: string): Promise<void> {
       "🤖 <b>ACP Management Bot</b>\n\n" +
       "Available commands:\n" +
       "/status — Check all seller status\n" +
-      "/sellers — List active sellers\n" +
+      "/sellers — List active sellers & offerings\n" +
       "/help — Show this message\n\n" +
       "📡 Monitoring: MNS + MCHAN + WhaleWatch sellers\n" +
       "🔔 Auto-alerts: New jobs & deliveries"

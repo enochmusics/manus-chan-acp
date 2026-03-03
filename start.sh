@@ -10,6 +10,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PID_DIR="/tmp/acp-pids"
+mkdir -p "$PID_DIR"
 
 echo "=============================================="
 echo "  ACP Seller Runtime — Railway Deployment"
@@ -23,12 +25,11 @@ export TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID:-74318760}"
 # --- 1. MNS Seller ---
 echo "[1/4] Starting MNS Seller..."
 cd "$SCRIPT_DIR/openclaw-acp-mns"
-export LITE_AGENT_API_KEY="acp-c004cdeac8b5fa744f71"
-export SELLER_LABEL="MNS"
 mkdir -p logs
 LITE_AGENT_API_KEY="acp-c004cdeac8b5fa744f71" SELLER_LABEL="MNS" \
   npx tsx seller.ts > logs/seller-mns.log 2>&1 &
 MNS_PID=$!
+echo $MNS_PID > "$PID_DIR/mns.pid"
 echo "  MNS Seller PID: $MNS_PID"
 
 # --- 2. MCHAN Seller ---
@@ -38,6 +39,7 @@ mkdir -p logs
 LITE_AGENT_API_KEY="acp-a0cc2140a0445b692b2b" SELLER_LABEL="MCHAN" \
   npx tsx seller.ts > logs/seller-mchan.log 2>&1 &
 MCHAN_PID=$!
+echo $MCHAN_PID > "$PID_DIR/mchan.pid"
 echo "  MCHAN Seller PID: $MCHAN_PID"
 
 # --- 3. WhaleWatch Seller ---
@@ -47,14 +49,20 @@ mkdir -p logs
 LITE_AGENT_API_KEY="acp-2336e53b78afdc005c43" SELLER_LABEL="WhaleWatch" \
   npx tsx seller.ts > logs/seller-whalewatch.log 2>&1 &
 WHALE_PID=$!
+echo $WHALE_PID > "$PID_DIR/whalewatch.pid"
 echo "  WhaleWatch Seller PID: $WHALE_PID"
 
 # --- 4. Telegram Bot ---
 echo "[4/4] Starting Telegram Management Bot..."
 cd "$SCRIPT_DIR/acp-telegram-bot"
 TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN" TELEGRAM_CHAT_ID="$TELEGRAM_CHAT_ID" \
+  MNS_LOG="$SCRIPT_DIR/openclaw-acp-mns/logs/seller-mns.log" \
+  MCHAN_LOG="$SCRIPT_DIR/openclaw-acp-mchan/logs/seller-mchan.log" \
+  WHALE_LOG="$SCRIPT_DIR/openclaw-acp-whalewatch/logs/seller-whalewatch.log" \
+  PID_DIR="$PID_DIR" \
   npx tsx bot.ts > /tmp/telegram-bot.log 2>&1 &
 BOT_PID=$!
+echo $BOT_PID > "$PID_DIR/bot.pid"
 echo "  Telegram Bot PID: $BOT_PID"
 
 echo ""
@@ -82,7 +90,7 @@ echo ""
 echo "=== Telegram Bot Log ==="
 tail -5 /tmp/telegram-bot.log 2>/dev/null || echo "(no log yet)"
 
-# Keep container alive — wait for any child to exit and restart
+# Keep container alive — monitor and auto-restart on failure
 echo ""
 echo "Monitoring processes (auto-restart on failure)..."
 while true; do
@@ -93,6 +101,7 @@ while true; do
     LITE_AGENT_API_KEY="acp-c004cdeac8b5fa744f71" SELLER_LABEL="MNS" \
       npx tsx seller.ts >> logs/seller-mns.log 2>&1 &
     MNS_PID=$!
+    echo $MNS_PID > "$PID_DIR/mns.pid"
     echo "[monitor] MNS Seller restarted (PID: $MNS_PID)"
   fi
 
@@ -103,6 +112,7 @@ while true; do
     LITE_AGENT_API_KEY="acp-a0cc2140a0445b692b2b" SELLER_LABEL="MCHAN" \
       npx tsx seller.ts >> logs/seller-mchan.log 2>&1 &
     MCHAN_PID=$!
+    echo $MCHAN_PID > "$PID_DIR/mchan.pid"
     echo "[monitor] MCHAN Seller restarted (PID: $MCHAN_PID)"
   fi
 
@@ -113,6 +123,7 @@ while true; do
     LITE_AGENT_API_KEY="acp-2336e53b78afdc005c43" SELLER_LABEL="WhaleWatch" \
       npx tsx seller.ts >> logs/seller-whalewatch.log 2>&1 &
     WHALE_PID=$!
+    echo $WHALE_PID > "$PID_DIR/whalewatch.pid"
     echo "[monitor] WhaleWatch Seller restarted (PID: $WHALE_PID)"
   fi
 
@@ -121,8 +132,13 @@ while true; do
     echo "[monitor] Telegram Bot died, restarting..."
     cd "$SCRIPT_DIR/acp-telegram-bot"
     TELEGRAM_BOT_TOKEN="$TELEGRAM_BOT_TOKEN" TELEGRAM_CHAT_ID="$TELEGRAM_CHAT_ID" \
+      MNS_LOG="$SCRIPT_DIR/openclaw-acp-mns/logs/seller-mns.log" \
+      MCHAN_LOG="$SCRIPT_DIR/openclaw-acp-mchan/logs/seller-mchan.log" \
+      WHALE_LOG="$SCRIPT_DIR/openclaw-acp-whalewatch/logs/seller-whalewatch.log" \
+      PID_DIR="$PID_DIR" \
       npx tsx bot.ts >> /tmp/telegram-bot.log 2>&1 &
     BOT_PID=$!
+    echo $BOT_PID > "$PID_DIR/bot.pid"
     echo "[monitor] Telegram Bot restarted (PID: $BOT_PID)"
   fi
 
