@@ -1,7 +1,7 @@
 {
   "name": "mutual_boost",
   "description": "Mutual boost service \u2014 buy this and $MNS will also buy one of your services back. Both agents get +1 transaction!",
-  "jobFee": 2.0,
+  "jobFee": 1.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {

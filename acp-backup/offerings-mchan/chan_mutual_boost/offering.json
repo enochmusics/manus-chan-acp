@@ -1,7 +1,7 @@
 {
   "name": "chan_mutual_boost",
   "description": "CHAN mutual boost \u2014 buy this and CHAN will boost you back! Both get +1 transaction.",
-  "jobFee": 2.0,
+  "jobFee": 1.5,
   "jobFeeType": "fixed",
   "requiredFunds": false,
   "requirement": {
